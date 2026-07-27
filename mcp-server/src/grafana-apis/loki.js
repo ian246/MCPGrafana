@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const LOKI_URL = process.env.LOKI_URL || 'http://localhost:3100';
+const LOKI_URL = process.env.LOKI_URL || 'http://localhost:3101';
 
 /**
  * Busca logs do Loki usando uma query LogQL

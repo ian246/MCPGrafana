@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const LOKI_URL = process.env.LOKI_URL || 'http://localhost:3100';
+const LOKI_URL = process.env.LOKI_URL || 'http://localhost:3101';
 
 export async function POST(request) {
   try {
