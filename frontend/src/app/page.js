@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 import './globals.css';
 
 export default function Home() {
@@ -37,11 +38,11 @@ export default function Home() {
       
       if (data.error) throw new Error(data.error);
       
-      setReportData(data);
+      setReportData(data.report);
       setReportStatus('done');
     } catch (err) {
       console.error(err);
-      setReportData({ error: 'Falha ao comunicar com o servidor MCP: ' + err.message });
+      setReportData('**Erro ao comunicar com o servidor:** ' + err.message);
       setReportStatus('error');
     }
   };
@@ -50,7 +51,7 @@ export default function Home() {
     <main className="container">
       <header className="header">
         <h1 className="title">Monitoramento de Instabilidade</h1>
-        <p className="subtitle">Análise avançada de logs usando MCP e Grafana Loki</p>
+        <p className="subtitle">Análise avançada via MCP, Grafana Loki e IA</p>
       </header>
 
       <div className="dashboard">
@@ -78,28 +79,28 @@ export default function Home() {
         </section>
 
         <section className="card">
-          <h2 className="card-title">📊 Análise MCP</h2>
+          <h2 className="card-title">🤖 Análise MCP + AI</h2>
           <button 
             onClick={handleGenerateReport} 
             disabled={reportStatus === 'generating'}
             className={`btn btn-primary ${reportStatus === 'generating' ? 'loading' : ''}`}
           >
-            {reportStatus === 'generating' ? 'Gerando Relatório...' : 'Gerar Relatório de Instabilidade'}
+            {reportStatus === 'generating' ? 'A IA está redigindo o relatório...' : 'Gerar Relatório Inteligente'}
           </button>
 
-          <div className="report-container">
+          <div className="report-container markdown-body">
             {reportStatus === 'idle' && (
-              <div className="report-placeholder">O relatório gerado aparecerá aqui</div>
+              <div className="report-placeholder">O relatório detalhado gerado por IA aparecerá aqui</div>
             )}
             
             {reportStatus === 'generating' && (
-              <div className="report-placeholder loading">Analisando logs via Model Context Protocol...</div>
+              <div className="report-placeholder loading">Extraindo logs via MCP e consultando OpenRouter...</div>
             )}
 
             {(reportStatus === 'done' || reportStatus === 'error') && reportData && (
-              <pre className="report-content">
-                {JSON.stringify(reportData, null, 2)}
-              </pre>
+              <div className="report-content">
+                <ReactMarkdown>{reportData}</ReactMarkdown>
+              </div>
             )}
           </div>
         </section>
