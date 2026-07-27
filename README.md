@@ -1,26 +1,67 @@
-# Analisador de Logs Grafana via MCP
+# Analisador de Logs Grafana via MCP + IA (OpenRouter) 🚀
 
-Uma aplicação web avançada que utiliza um frontend em Next.js e um servidor Node.js com o Protocolo de Contexto de Modelo (Model Context Protocol - MCP) para analisar logs de sistema a partir do Grafana Loki, reportando instabilidades e erros.
+Uma aplicação web avançada que utiliza a inovadora arquitetura **MCP (Model Context Protocol)** para criar uma ponte segura entre a sua infraestrutura de logs (Grafana Loki) e as Inteligências Artificiais. 
 
-## Contexto
+Em vez de olhar para painéis confusos ou analisar JSONs massivos, este sistema coleta seus logs de sistema através do MCP e os envia para uma IA (via OpenRouter), que atua como um Engenheiro SRE gerando um diagnóstico textual limpo e visual sobre a saúde da sua aplicação.
 
-Este projeto demonstra a integração de tecnologias modernas de frontend com o emergente Protocolo de Contexto de Modelo (MCP). Ele apresenta uma interface de usuário premium e interativa construída com Next.js, e um servidor MCP robusto no backend que se conecta ao Grafana Loki para extrair e analisar logs em tempo real.
+---
 
-O objetivo deste projeto é fornecer uma arquitetura limpa e baseada em funcionalidades (features), muito bem documentada e pronta para ser exibida em plataformas como GitHub e LinkedIn.
+## 🏗️ Arquitetura do Projeto
 
-## Arquitetura
+O projeto está dividido em camadas que trabalham juntas:
+*   **Dados (Grafana + Loki)**: Rodando em Docker, atua como o banco de logs da aplicação.
+*   **Servidor MCP (Node.js)**: Um servidor isolado que se conecta ao Loki e expõe uma "Ferramenta Universal" (`analyze_system_health`) usando o SDK do Model Context Protocol.
+*   **Frontend (Next.js)**: Uma interface premium onde o usuário pode simular erros. Ela atua como um **Cliente MCP** em background para chamar o servidor Node.js.
+*   **Inteligência Artificial (OpenRouter)**: O Next.js passa os dados extraídos pelo MCP para uma IA gerar um relatório SRE formatado em Markdown.
 
-*   **Frontend**: Next.js (App Router) oferecendo uma interface de usuário dinâmica e refinada.
-*   **Servidor MCP**: Aplicação Node.js utilizando o SDK `@modelcontextprotocol/sdk` para expor as ferramentas de análise de logs.
-*   **Integração**: As rotas da API do Next.js atuam como um Cliente MCP para interagir com o servidor MCP (Node.js), que por sua vez consulta a API HTTP do Grafana Loki.
+---
 
-## Funcionalidades (Planejadas)
+## 🚀 Como Rodar o Projeto Localmente
 
-*   **Dashboard Interativo**: Uma interface elegante com tema escuro (dark mode) para iniciar a análise dos logs.
-*   **Integração MCP**: Comunicação perfeita entre o cliente web e o servidor MCP.
-*   **Conectividade com Grafana Loki**: Consultas diretas às streams de logs com base em parâmetros personalizados.
-*   **Detecção de Instabilidade**: Análise automatizada de logs para detectar erros, lentidão e instabilidade no sistema.
+Siga o passo a passo abaixo para rodar toda a arquitetura na sua máquina (Não é necessário subir na nuvem, tudo foi desenhado para rodar e ser testado localmente).
 
-## Como Começar
+### Pré-requisitos
+- [Docker e Docker Compose](https://www.docker.com/products/docker-desktop/) instalados.
+- [Node.js](https://nodejs.org/) (versão 18+ recomendada) instalado.
+- Uma chave de API gratuita no [OpenRouter](https://openrouter.ai/).
 
-*(As instruções serão adicionadas conforme a implementação do projeto avançar)*
+### Passo 1: Subir a Infraestrutura (Loki & Grafana)
+Abra um terminal na pasta raiz do projeto e execute:
+```bash
+docker-compose up -d
+```
+*Isso vai baixar as imagens e iniciar o Grafana na porta `3005` e o Loki na porta `3101`.*
+
+### Passo 2: Configurar as Variáveis de Ambiente
+1. Entre na pasta `frontend`:
+   ```bash
+   cd frontend
+   ```
+2. Crie um arquivo chamado `.env.local` usando o arquivo de exemplo como base:
+   - Copie o arquivo `.env.example` e renomeie a cópia para `.env.local`.
+   - Abra o `.env.local` e cole a sua chave do OpenRouter:
+     ```env
+     OPENROUTER_API_KEY=sua_chave_aqui
+     ```
+
+### Passo 3: Iniciar a Aplicação Next.js + MCP
+Ainda dentro da pasta `frontend`, instale as dependências e rode o projeto:
+```bash
+npm install
+npm run dev
+```
+*O Next.js será iniciado na porta `3001`.*
+
+---
+
+## 🧪 Como Testar
+
+1. Acesse o Frontend no seu navegador: [http://localhost:3001](http://localhost:3001)
+2. **Injete Logs**: Clique nos botões de "Simular Tráfego" (Acesso, Erro 500, Lentidão). O Frontend vai enviar esses dados reais para o seu Loki rodando no Docker.
+3. *(Opcional)* Veja os dados no Grafana: Acesse [http://localhost:3005](http://localhost:3005), vá em "Explore", escolha o "Label Filter: job = frontend-logs" e clique em Run Query.
+4. **Mágica do MCP + IA**: De volta ao seu Frontend, clique no botão gigante azul **"Gerar Relatório Inteligente"**. A aplicação iniciará a conexão MCP com o servidor, analisará as métricas e a IA escreverá um diagnóstico lindamente formatado na tela para você!
+
+---
+
+## 🔒 Segurança de Dados
+Este projeto foi configurado para que o arquivo `.env.local` (que contém sua chave de API pessoal) seja ignorado pelo Git (veja o `.gitignore`). **Nunca de um commit (push) da sua chave real para o GitHub.** Sempre utilize o `.env.example` para mostrar aos usuários quais chaves são necessárias.
