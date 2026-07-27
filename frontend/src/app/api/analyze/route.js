@@ -57,6 +57,7 @@ export async function GET() {
       - Fale sobre o "Índice de Estabilidade" (Stability Score) e o que ele significa.
       - Se houver lentidão ou erros listados, cite-os brevemente e sugira como a equipe pode investigar.
       - Não repita simplesmente o JSON, aja como um especialista humano elaborando um insight.
+      - IMPORTANTE: NÃO indente listas ou parágrafos com espaços adicionais. Mantenha tudo alinhado à margem esquerda para evitar que o Markdown renderize blocos de código pré-formatados acidentais no frontend.
     `;
 
     const completion = await openai.chat.completions.create({
