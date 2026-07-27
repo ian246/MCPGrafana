@@ -29,8 +29,10 @@ node_modules/
 .next
 out
 
-# Mac OS
+# Mac OS / Windows
 .DS_Store
+Thumbs.db
+desktop.ini
 
 # Editor directories and files
 .idea
@@ -40,3 +42,7 @@ out
 *.njsproj
 *.sln
 *.sw?
+
+# Build outputs
+dist/
+build/

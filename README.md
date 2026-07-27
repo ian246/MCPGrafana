@@ -1,26 +1,26 @@
-# Grafana MCP Log Analyzer
+# Analisador de Logs Grafana via MCP
 
-An advanced web application that leverages a Next.js frontend and a Node.js Model Context Protocol (MCP) server to analyze system logs from Grafana Loki and report on system stability and errors.
+Uma aplicação web avançada que utiliza um frontend em Next.js e um servidor Node.js com o Protocolo de Contexto de Modelo (Model Context Protocol - MCP) para analisar logs de sistema a partir do Grafana Loki, reportando instabilidades e erros.
 
-## Context
+## Contexto
 
-This project demonstrates the integration of modern frontend technologies with the emerging Model Context Protocol (MCP). It features a premium, interactive user interface built with Next.js, and a robust backend MCP server that connects to Grafana Loki to extract and analyze logs in real-time. 
+Este projeto demonstra a integração de tecnologias modernas de frontend com o emergente Protocolo de Contexto de Modelo (MCP). Ele apresenta uma interface de usuário premium e interativa construída com Next.js, e um servidor MCP robusto no backend que se conecta ao Grafana Loki para extrair e analisar logs em tempo real.
 
-The goal of this project is to provide a clean, feature-driven architecture that is well-documented and ready to be showcased on platforms like GitHub and LinkedIn.
+O objetivo deste projeto é fornecer uma arquitetura limpa e baseada em funcionalidades (features), muito bem documentada e pronta para ser exibida em plataformas como GitHub e LinkedIn.
 
-## Architecture
+## Arquitetura
 
-*   **Frontend**: Next.js App Router providing a dynamic, polished user interface.
-*   **MCP Server**: Node.js application utilizing the `@modelcontextprotocol/sdk` to expose log analysis tools.
-*   **Integration**: The Next.js API routes act as an MCP Client to interact with the standalone Node.js MCP server, which in turn queries Grafana Loki's HTTP API.
+*   **Frontend**: Next.js (App Router) oferecendo uma interface de usuário dinâmica e refinada.
+*   **Servidor MCP**: Aplicação Node.js utilizando o SDK `@modelcontextprotocol/sdk` para expor as ferramentas de análise de logs.
+*   **Integração**: As rotas da API do Next.js atuam como um Cliente MCP para interagir com o servidor MCP (Node.js), que por sua vez consulta a API HTTP do Grafana Loki.
 
-## Features (Planned)
+## Funcionalidades (Planejadas)
 
-*   **Interactive Dashboard**: A sleek, dark-themed UI to initiate log analysis.
-*   **MCP Integration**: Seamless communication between the web client and the MCP server.
-*   **Grafana Loki Connectivity**: Direct querying of log streams based on custom parameters.
-*   **Instability Detection**: Automated parsing of logs to detect errors, timeouts, and system instability.
+*   **Dashboard Interativo**: Uma interface elegante com tema escuro (dark mode) para iniciar a análise dos logs.
+*   **Integração MCP**: Comunicação perfeita entre o cliente web e o servidor MCP.
+*   **Conectividade com Grafana Loki**: Consultas diretas às streams de logs com base em parâmetros personalizados.
+*   **Detecção de Instabilidade**: Análise automatizada de logs para detectar erros, lentidão e instabilidade no sistema.
 
-## Getting Started
+## Como Começar
 
-*(Instructions will be added as the project is implemented)*
+*(As instruções serão adicionadas conforme a implementação do projeto avançar)*
